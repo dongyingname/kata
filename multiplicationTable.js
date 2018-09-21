@@ -1,34 +1,48 @@
 function multiplicationTable(num){
+  var size = num.length;
   var matrix = [];
-  var width = num * 6;
-  var height = num * 4;
-  var matrix = [];
-      H = height;
-      W = width;
-  for (var y = 0; y < height; y ++){
-    matrix[y] = [];
-    for (var x = 0; x < width; x ++){
-      if (y % 4 == 0){
-        if (x % 6 == 0){
+  var h = 4 * num;
+  var w = 5 * num;
+  for (var y = 0;y <= h;y ++){
+    matrix[y] = []; // have to define row before assigning element to it
+    if (y % 4 == 0){
+      for (var x = 0; x <= w;x ++){
+        if (x % 5 == 0){
           matrix[y][x] = '+';
         }
         else{
           matrix[y][x] = '-';
         }
       }
-      else if (y % 2 == 1){
-        matrix[y][x] = " ";
-      }
-      else if (y % 4 == 2){
-        if (x % 6 == 2){
-          matrix[y][x] = (Math.floor(x / 6) + 1) * Math.floor(y / 4);
+      matrix[y] = matrix[y].join('');
+    }
+    else if (y % 4 == 2){
+      for (var x = 0;x <= w; x ++){
+        if (x % 5 == 0){
+          matrix[y][x] = '|';
+        }
+        else if (x % 5 == 3){
+          matrix[y][x] = (Math.floor(x / 5) + 1) * (Math.floor(y / 4) + 1);
+         /// matrix[y][x]= matrix[y][x].toString(); tried to used this to modify the number of elements so number fit
+        }
+        else{
+          matrix[y][x] = " ";
         }
       }
+      matrix[y] = matrix[y].join('');
+    }
+    else{
+      for (var x = 0;x <= w; x ++){
+        matrix[y][x] = ' ';
+      }
+      matrix[y] = matrix[y].join('');
     }
   }
-  matrix=matrix.join();
+
+  matrix = matrix.join('\n');
   return matrix;
-};
+}
 
-
+console.log(multiplicationTable(1));
 console.log(multiplicationTable(5));
+console.log(multiplicationTable(10));
